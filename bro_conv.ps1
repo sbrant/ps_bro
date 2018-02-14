@@ -1,4 +1,4 @@
-foreach($line in Get-Content ~/temp/dns.log) {
+foreach($line in Get-Content ~/wip/bro/http.log) {
     # capture fields
     if($line -match '^\#fields.*') {
         $mod_line = $line.TrimStart("#fields  ").TrimStart()
@@ -8,8 +8,8 @@ foreach($line in Get-Content ~/temp/dns.log) {
         Continue
     # write data fields to clean file
     } else {
-        Write-Output $line | Out-File -Append -FilePath "~/temp/dns.clean.csv"
+        Write-Output $line | Out-File -Append -FilePath "~/wip/bro/http.clean.csv"
     }
 }
-Import-Csv ~/temp/dns.clean.csv -Header $split_line -Delimiter `t | ConvertTo-Json -Compress | Out-File -FilePath "~/temp/dns.json"
+Import-Csv ~/wip/bro/http.clean.csv -Header $split_line -Delimiter `t | ConvertTo-Json -Compress | Out-File -FilePath "~/wip/bro/dns.json"
 
